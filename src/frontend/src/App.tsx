@@ -45,6 +45,7 @@ const SERVICES = [
   {
     icon: Scissors,
     title: "Haircut & Styling",
+    image: "/assets/generated/service-cutting.dim_400x300.jpg",
     description:
       "Precision cuts and styling tailored to your face shape and lifestyle. From classic to avant-garde, our stylists bring your vision to life.",
     color: "rose",
@@ -52,6 +53,7 @@ const SERVICES = [
   {
     icon: Sparkles,
     title: "Facial & Skincare",
+    image: "/assets/generated/facial-service.dim_600x400.jpg",
     description:
       "Restore your natural radiance with our luxurious facial treatments. We use premium skincare products for deep cleansing and hydration.",
     color: "gold",
@@ -59,6 +61,7 @@ const SERVICES = [
   {
     icon: Star,
     title: "Makeup Artistry",
+    image: "/assets/generated/makeup-service.dim_600x400.jpg",
     description:
       "From everyday glam to special occasions, our makeup artists create flawless looks that enhance your natural beauty and confidence.",
     color: "rose",
@@ -66,6 +69,7 @@ const SERVICES = [
   {
     icon: Heart,
     title: "Waxing",
+    image: "/assets/generated/waxing-service.dim_600x400.jpg",
     description:
       "Smooth, silky results with our gentle waxing services. We use premium waxes suitable for all skin types for a comfortable experience.",
     color: "gold",
@@ -73,6 +77,7 @@ const SERVICES = [
   {
     icon: Crown,
     title: "Bridal Packages",
+    image: "/assets/generated/bridal-package-service.dim_600x400.jpg",
     description:
       "Make your special day unforgettable with our comprehensive bridal packages. Complete beauty preparation for the bride and her entourage.",
     color: "rose",
@@ -80,6 +85,7 @@ const SERVICES = [
   {
     icon: Gem,
     title: "Nail Care",
+    image: "/assets/generated/service-nail.dim_400x300.jpg",
     description:
       "Express your personality with stunning nail art and treatments. From classic manicures to intricate designs, every detail perfected.",
     color: "gold",
@@ -421,6 +427,13 @@ export default function App() {
                 className="group relative bg-card rounded-2xl p-8 shadow-xs border border-border hover:shadow-luxury transition-all duration-500 hover:-translate-y-1 overflow-hidden"
                 data-ocid={`services.item.${idx + 1}`}
               >
+                {service.image && (
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    className="w-full h-40 object-cover rounded-xl mb-5"
+                  />
+                )}
                 <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-rose-blush/40 to-transparent rounded-bl-full" />
                 <div
                   className={`inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-5 ${
