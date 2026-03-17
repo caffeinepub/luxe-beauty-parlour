@@ -198,18 +198,57 @@ export default function App() {
     bookingRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const sendWhatsAppNotification = (data: {
+    name: string;
+    phone: string;
+    service: string;
+    date: string;
+    timeSlot: string;
+    notes: string;
+  }) => {
+    const message = encodeURIComponent(
+      `New Appointment Booking!
+
+Customer: ${data.name}
+Phone: ${data.phone}
+Service: ${data.service}
+Date: ${data.date}
+Time: ${data.timeSlot}${
+        data.notes
+          ? `
+Notes: ${data.notes}`
+          : ""
+      }`,
+    );
+    window.open(`https://wa.me/918840229255?text=${message}`, "_blank");
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.service) return;
-    submitMutation.mutate({
-      customerName: formData.name,
-      phoneNumber: formData.phone,
-      email: formData.email,
-      service: formData.service as ServiceType,
-      preferredDate: formData.date,
-      preferredTimeSlot: formData.timeSlot,
-      notes: formData.notes || null,
-    });
+    submitMutation.mutate(
+      {
+        customerName: formData.name,
+        phoneNumber: formData.phone,
+        email: formData.email,
+        service: formData.service as ServiceType,
+        preferredDate: formData.date,
+        preferredTimeSlot: formData.timeSlot,
+        notes: formData.notes || null,
+      },
+      {
+        onSuccess: () => {
+          sendWhatsAppNotification({
+            name: formData.name,
+            phone: formData.phone,
+            service: formData.service,
+            date: formData.date,
+            timeSlot: formData.timeSlot,
+            notes: formData.notes,
+          });
+        },
+      },
+    );
   };
 
   const resetForm = () => {
